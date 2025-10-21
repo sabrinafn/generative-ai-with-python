@@ -1,0 +1,50 @@
+1. O passo a passo para obter uma chave de api.
+
+    - On Google AI Studio, clicked on 'Create API Key'.
+        - Name the key and create/select a project to add it to.
+        - After creation, you can copy the key.
+    - Set the key as an environment variable:
+        - Check which shell it's being used with: `echo $SHELL`
+        - Open to edit the configuration file with:
+            - if bash: `vim ~/.bashrc`
+            - if zsh: `vim ~/.zshrc`
+        - Add this line to the file: `export GEMINI_API_KEY=<API_KEY_HERE>`
+        - Apply changes by running:
+            - if bash: `source ~/.bashrc`
+            - if zsh: `source ~/.zshrc`
+    
+    {https://ai.google.dev/gemini-api/docs/api-key}
+    {https://ai.google.dev/gemini-api/docs/api-key#set-api-env-var}
+
+
+2. Alguns modelos de LLM suportados pelo provedor, e seus rate limits.
+
+
+    - On Free Tier:
+
+        Gemini 2.5 Pro:
+            - 5 Requests per minute
+            - 125,000 Tokens per minute
+            - 100 requests per day
+        Gemini 2.5 Flash
+            - 10 Requests per minute
+            - 250,000 Tokens per minute
+            - 250 requests per day
+        Gemini 2.5 Flash-Lite
+            - 15 Requests per minute
+            - 250,000 Tokens per minute
+            - 1,000 requests per day
+        Gemini 2.0 Flash
+            - 15 Requests per minute
+            - 1,000,000	Tokens per minute
+            - 200 requests per day
+
+
+    {https://ai.google.dev/gemini-api/docs/rate-limits#free-tier}
+
+
+
+3. A url para a documentação da API deste provedor, onde demonstre como utilizá-la
+para enviar um prompt.
+
+    {https://ai.google.dev/gemini-api/docs}
