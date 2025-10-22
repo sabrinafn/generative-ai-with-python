@@ -4,11 +4,41 @@ import os
 
 instructions = """
 <instructions>
+You are a travel advisor AI. 
+Your task is to receive a location as input 
+and return the 5 best tourist attractions for that location. 
+Respond with a simple numbered list, no extra text.
+If the input is not a valid location, respond with a clear message explaining that you could not find the location, and remind that you are a travel advisor AI.
 </instructions>
 """
 
 example = """
 <examples>
+Here a few examples:
+
+Input: "Paris"
+Output:
+1. Torre Eiffel
+2. Museu do Louvre
+3. Catedral de Notre-Dame
+4. Arco do Triunfo
+5. Basílica de Sacré-Cœur
+
+Input: "Rome"
+Output:
+1. Coliseu
+2. Fontana di Trevi
+3. Vaticano
+4. Panteão
+5. Piazza Navona
+
+Input: "New York"
+Output:
+1. Estátua da Liberdade
+2. Central Park
+3. Times Square
+4. Empire State Building
+5. Museu Metropolitano de Arte
 </examples>
 """
 
@@ -17,23 +47,20 @@ def validate_arguments():
     prog = os.path.basename(sys.argv[0])
     if (len(sys.argv) == 2 and sys.argv[1] != ""):
         return sys.argv[1]
-    print(f'Usage: python3 ./{prog} [prompt]')
+    print(f'Usage: python3 ./{prog} [holiday location]')
     return sys.exit(1)
-
-# this function constructs the few-shot prompt by appending it with the term received
-def construct_prompt(example, prompt):
-    return f"{example}\n<text>prompt: {prompt}\noutput:</text>"
 
 # this function calls the GenAI API and returns the model's response
 def generate_response(prompt):
+    prompt = f"<text>prompt: {prompt}\noutput:</text>"
     try:
         client = genai.Client()
         response = client.models.generate_content(
-            model = "gemini-2.0-flash-lite",
+            model = "gemini-2.0-flash",
             contents = prompt,
             config = {
                 "temperature": 0.0,
-                "system_instruction": instructions
+                "system_instruction": instructions + example
             },
         )
         print(response.text)
@@ -44,8 +71,7 @@ def generate_response(prompt):
 # main  
 def main():
     prompt = validate_arguments()
-    constructed_prompt = construct_prompt(example, prompt)
-    generate_response(constructed_prompt)
+    generate_response(prompt)
 
 if __name__ == "__main__":
     main()
