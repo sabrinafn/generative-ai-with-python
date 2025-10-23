@@ -1,7 +1,6 @@
 from google import genai
 import sys
 import os
-from pydantic import BaseModel
 
 instructions = """
 <instructions>
@@ -12,35 +11,19 @@ Given a sentence describing a person, extract:
 - profession
 - city of residence
 
-Always respond **only in valid JSON**, in the following format:
-{
-  "nome": "string",
-  "idade": number,
-  "profissão": "string",
-  "cidade": "string"
-}
-
+Always respond only in valid JSON.
 Do not include any explanations, text, or comments outside the JSON.
 </instructions>
 """
 
 example = """
-<examples>
-Here a few examples:
+<example>
+Here is an example:
 
 Input: "João Silva, 35 anos, é engenheiro e mora em São Paulo"
 Output: {"nome": "João Silva", "idade": 35, "profissão": "engenheiro", "cidade": "São Paulo"}
 
-Input: "Maria Fernandes tem 28 anos, trabalha como médica e vive em Belo Horizonte"
-Output: {"nome": "Maria Fernandes", "idade": 28, "profissão": "médica", "cidade": "Belo Horizonte"}
-
-Input: "Rafael Oliveira, 33 anos, trabalha como nutricionista e vive em Florianópolis"
-Output: {"nome": "Rafael Oliveira", "idade": 33, "profissão": "nutricionista", "cidade": "Florianópolis"}
-
-Input: "Camila Santos, 31 anos, é professora de yoga em Manaus"
-Output: {"nome": "Camila Santos", "idade": 31, "profissão": "professora de yoga", "cidade": "Manaus"}
-
-</examples>
+</example>
 """
 
 # this function validates CLI args and returns the provided term
