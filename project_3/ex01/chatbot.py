@@ -98,7 +98,8 @@ def main():
             "assistant": response
         })
         if len(chat_history) > max_history:
-            chat_history = chat_history[-max_history:]
+            chat_history = chat_history[-max_history:] 
+            # [-5:] positions before the last position: until the end of the list
 
 
 if __name__ == "__main__":
