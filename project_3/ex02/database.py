@@ -1,6 +1,7 @@
 import sqlalchemy
 from sqlalchemy import create_engine, Integer, String, Text, DateTime
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
+from datetime import datetime
 
 ### DATABASE
 
@@ -28,4 +29,4 @@ def init_db(db_url: str = "sqlite:///chat_memory.db"):
     engine = create_engine(db_url, echo=False)
     Base.metadata.create_all(engine)
     SessionLocal = sessionmaker(bind=engine)
-    return SessionLocal()
+    return SessionLocal
